@@ -16,7 +16,7 @@ public class MovieService {
 	public Movie getMovieInfo(@PathVariable("movieId") String movieId)
 	{
 		
-		return new Movie(movieId,"testname");
+		return new Movie(movieId,"Titanic"," Released in 2001");
 	}
 
 }

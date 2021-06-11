@@ -1,10 +1,11 @@
-package com.rating.data.service.model;
+package com.example.demo.model;
 
 public class Rating {
 
 	private String movieId;
 	private int rating;
 
+	
 	public Rating() {
 		super();
 		// TODO Auto-generated constructor stub

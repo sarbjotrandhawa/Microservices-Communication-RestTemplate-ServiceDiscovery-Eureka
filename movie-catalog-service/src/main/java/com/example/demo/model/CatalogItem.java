@@ -6,6 +6,11 @@ public class CatalogItem {
 	private String description;
 	private String rating;
 
+	public CatalogItem() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public CatalogItem(String name, String description, String rating) {
 		super();
 		this.name = name;
