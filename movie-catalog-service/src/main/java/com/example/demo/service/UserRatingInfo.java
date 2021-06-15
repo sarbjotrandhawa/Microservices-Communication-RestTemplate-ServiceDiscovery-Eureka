@@ -10,14 +10,19 @@ import org.springframework.web.client.RestTemplate;
 import com.example.demo.model.Rating;
 import com.example.demo.model.UserRating;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 @Service
 public class UserRatingInfo {
-	
+
 	@Autowired
 	RestTemplate restTemplate;
 
-	@HystrixCommand(fallbackMethod = "getFallbackUserRating")
+	@HystrixCommand(fallbackMethod = "getFallbackUserRating", commandProperties = {
+			@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
+			@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
+			@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000"), })
 	public UserRating getUserRating(@PathVariable("userId") String userId) {
 		UserRating userRating = restTemplate.getForObject("http://rating-data-service/ratingdata/user/" + userId,
 				UserRating.class);
